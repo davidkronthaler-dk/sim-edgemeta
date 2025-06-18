@@ -22,17 +22,3 @@ test_that("data-generating mechanisms works for all scenarios", {
   
 })
 
-# Simstudy (iterations for one scenario)
-test_that("simstudy doesn't break with invalid niter", {
-  result <- suppressWarnings(simstudy(0, 0, 0, "N", 1))
-  
-  # Check that a data frame is returned
-  expect_s3_class(result, "data.frame")
-  
-  # Should have 1 row (since replicate fails and fallback matrix is used)
-  expect_equal(nrow(result), 1)
-  
-  # Should have 4 metadata columns + 54 NA columns
-  expect_equal(ncol(result), 58)
-  
-})

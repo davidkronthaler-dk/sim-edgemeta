@@ -92,9 +92,19 @@ simcrps <- function(s, tn) {
         length(tn_clean) == 0)
       return(NA_real_)
     
-    mean(sapply(as.list(tn_clean), function(x)
-      scoringRules::crps_sample(x, s_clean)),
-      na.rm = TRUE)
+    metaprediction::crps(s_clean, tn_clean)
+    
   })
   return(sc)
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -76,3 +76,4 @@ test_that("simcrps returns NA if all s or tn are NA", {
   expect_true(is.na(simcrps(c(NA, NA), c(1, 2))))
   expect_true(is.na(simcrps(c(1, 2), c(NA, NA))))
 })
+
