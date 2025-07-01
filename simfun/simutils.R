@@ -97,14 +97,3 @@ simcrps <- function(s, tn) {
   })
   return(sc)
 }
-
-
-
-
-
-
-
-
-
-
-

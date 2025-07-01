@@ -1,0 +1,446 @@
+
+R version 4.5.0 (2025-04-11) -- "How About a Twenty-Six"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> # ------------------------------------------------------------------------------
+> # Main document for the simulation study on meta-analysis evaluating 
+> # - Predictive distributions
+> # - 95% Prediction intervals 
+> # - Point estimators for the average effect
+> # - Confidence intervals for the average effect
+> # We compare methods proposed by us to standard methods implemented in the 
+> # 'meta' package and methods proposed by Held et al. (2025) implemented in the
+> # 'confMeta' package
+> #-------------------------------------------------------------------------------
+> 
+> ## Load libraries
+> ##------------------------------------------------------------------------------
+> library(doRNG)             # RNG streams
+Loading required package: foreach
+Loading required package: rngtools
+> library(doParallel)        # Parallelization
+Loading required package: iterators
+Loading required package: parallel
+> library(metaprediction)    # Our package
+> library(sn)                # Skew-normal distribution
+Loading required package: stats4
+
+Attaching package: ‘sn’
+
+The following object is masked from ‘package:stats’:
+
+    sd
+
+> library(meta)              # Standard methods
+Loading required package: metadat
+Loading 'meta' package (version 8.1-0).
+Type 'help(meta)' for a brief overview.
+> library(testthat)          # Tests for simulation functions
+> 
+> ## Source functions and perform unit tests
+> ##------------------------------------------------------------------------------
+> source("simutils.R")
+> source("testthat_utils.R")
+Test passed 🥇
+Test passed 🎊
+Test passed 🥇
+Test passed 🌈
+Test passed 🥇
+Test passed 🎉
+Test passed 😀
+Test passed 🥳
+> source("metamethods.R")
+> source("performance.R")
+> source("simfunctions.R")
+> source("testthat_simfunctions.R")
+Test passed 🥇
+> 
+> ## Run the simulation
+> ##------------------------------------------------------------------------------
+> set.seed(021098)
+> itersim(k = c(3, 5, 10, 20, 50), I2 = c(0.0, 0.3, 0.6, 0.9),
++         k_large = c(0, 1, 2), dist = c("N", "LSN"), niter = 4000)
+
+[2025-06-26 13:36:48] Running Parameter Iteration 1 of 120
+Parameters: k = 3, I2 = 0, dist = 1, k_large = 0
+
+[2025-06-26 13:41:38] Running Parameter Iteration 2 of 120
+Parameters: k = 5, I2 = 0, dist = 1, k_large = 0
+
+[2025-06-26 13:47:10] Running Parameter Iteration 3 of 120
+Parameters: k = 10, I2 = 0, dist = 1, k_large = 0
+
+[2025-06-26 13:54:45] Running Parameter Iteration 4 of 120
+Parameters: k = 20, I2 = 0, dist = 1, k_large = 0
+
+[2025-06-26 14:06:32] Running Parameter Iteration 5 of 120
+Parameters: k = 50, I2 = 0, dist = 1, k_large = 0
+
+[2025-06-26 14:51:51] Running Parameter Iteration 6 of 120
+Parameters: k = 3, I2 = 0.3, dist = 1, k_large = 0
+
+[2025-06-26 14:57:19] Running Parameter Iteration 7 of 120
+Parameters: k = 5, I2 = 0.3, dist = 1, k_large = 0
+
+[2025-06-26 15:03:07] Running Parameter Iteration 8 of 120
+Parameters: k = 10, I2 = 0.3, dist = 1, k_large = 0
+
+[2025-06-26 15:11:38] Running Parameter Iteration 9 of 120
+Parameters: k = 20, I2 = 0.3, dist = 1, k_large = 0
+
+[2025-06-26 15:25:29] Running Parameter Iteration 10 of 120
+Parameters: k = 50, I2 = 0.3, dist = 1, k_large = 0
+
+[2025-06-26 16:27:40] Running Parameter Iteration 11 of 120
+Parameters: k = 3, I2 = 0.6, dist = 1, k_large = 0
+
+[2025-06-26 16:33:20] Running Parameter Iteration 12 of 120
+Parameters: k = 5, I2 = 0.6, dist = 1, k_large = 0
+
+[2025-06-26 16:39:27] Running Parameter Iteration 13 of 120
+Parameters: k = 10, I2 = 0.6, dist = 1, k_large = 0
+
+[2025-06-26 16:48:04] Running Parameter Iteration 14 of 120
+Parameters: k = 20, I2 = 0.6, dist = 1, k_large = 0
+
+[2025-06-26 17:03:23] Running Parameter Iteration 15 of 120
+Parameters: k = 50, I2 = 0.6, dist = 1, k_large = 0
+
+[2025-06-26 18:10:29] Running Parameter Iteration 16 of 120
+Parameters: k = 3, I2 = 0.9, dist = 1, k_large = 0
+
+[2025-06-26 18:16:04] Running Parameter Iteration 17 of 120
+Parameters: k = 5, I2 = 0.9, dist = 1, k_large = 0
+
+[2025-06-26 18:22:44] Running Parameter Iteration 18 of 120
+Parameters: k = 10, I2 = 0.9, dist = 1, k_large = 0
+
+[2025-06-26 18:31:21] Running Parameter Iteration 19 of 120
+Parameters: k = 20, I2 = 0.9, dist = 1, k_large = 0
+
+[2025-06-26 18:46:09] Running Parameter Iteration 20 of 120
+Parameters: k = 50, I2 = 0.9, dist = 1, k_large = 0
+
+[2025-06-26 19:50:12] Running Parameter Iteration 21 of 120
+Parameters: k = 3, I2 = 0, dist = 2, k_large = 0
+
+[2025-06-26 19:55:32] Running Parameter Iteration 22 of 120
+Parameters: k = 5, I2 = 0, dist = 2, k_large = 0
+
+[2025-06-26 20:01:36] Running Parameter Iteration 23 of 120
+Parameters: k = 10, I2 = 0, dist = 2, k_large = 0
+
+[2025-06-26 20:09:23] Running Parameter Iteration 24 of 120
+Parameters: k = 20, I2 = 0, dist = 2, k_large = 0
+
+[2025-06-26 20:21:15] Running Parameter Iteration 25 of 120
+Parameters: k = 50, I2 = 0, dist = 2, k_large = 0
+
+[2025-06-26 21:05:42] Running Parameter Iteration 26 of 120
+Parameters: k = 3, I2 = 0.3, dist = 2, k_large = 0
+
+[2025-06-26 21:11:10] Running Parameter Iteration 27 of 120
+Parameters: k = 5, I2 = 0.3, dist = 2, k_large = 0
+
+[2025-06-26 21:17:01] Running Parameter Iteration 28 of 120
+Parameters: k = 10, I2 = 0.3, dist = 2, k_large = 0
+
+[2025-06-26 21:25:04] Running Parameter Iteration 29 of 120
+Parameters: k = 20, I2 = 0.3, dist = 2, k_large = 0
+
+[2025-06-26 21:38:59] Running Parameter Iteration 30 of 120
+Parameters: k = 50, I2 = 0.3, dist = 2, k_large = 0
+
+[2025-06-26 22:41:54] Running Parameter Iteration 31 of 120
+Parameters: k = 3, I2 = 0.6, dist = 2, k_large = 0
+
+[2025-06-26 22:47:02] Running Parameter Iteration 32 of 120
+Parameters: k = 5, I2 = 0.6, dist = 2, k_large = 0
+
+[2025-06-26 22:53:05] Running Parameter Iteration 33 of 120
+Parameters: k = 10, I2 = 0.6, dist = 2, k_large = 0
+
+[2025-06-26 23:01:33] Running Parameter Iteration 34 of 120
+Parameters: k = 20, I2 = 0.6, dist = 2, k_large = 0
+
+[2025-06-26 23:16:31] Running Parameter Iteration 35 of 120
+Parameters: k = 50, I2 = 0.6, dist = 2, k_large = 0
+
+[2025-06-27 00:22:50] Running Parameter Iteration 36 of 120
+Parameters: k = 3, I2 = 0.9, dist = 2, k_large = 0
+
+[2025-06-27 00:28:35] Running Parameter Iteration 37 of 120
+Parameters: k = 5, I2 = 0.9, dist = 2, k_large = 0
+
+[2025-06-27 00:35:07] Running Parameter Iteration 38 of 120
+Parameters: k = 10, I2 = 0.9, dist = 2, k_large = 0
+
+[2025-06-27 00:44:11] Running Parameter Iteration 39 of 120
+Parameters: k = 20, I2 = 0.9, dist = 2, k_large = 0
+
+[2025-06-27 00:59:10] Running Parameter Iteration 40 of 120
+Parameters: k = 50, I2 = 0.9, dist = 2, k_large = 0
+
+[2025-06-27 02:02:56] Running Parameter Iteration 41 of 120
+Parameters: k = 3, I2 = 0, dist = 1, k_large = 1
+
+[2025-06-27 02:08:28] Running Parameter Iteration 42 of 120
+Parameters: k = 5, I2 = 0, dist = 1, k_large = 1
+
+[2025-06-27 02:14:25] Running Parameter Iteration 43 of 120
+Parameters: k = 10, I2 = 0, dist = 1, k_large = 1
+
+[2025-06-27 02:22:02] Running Parameter Iteration 44 of 120
+Parameters: k = 20, I2 = 0, dist = 1, k_large = 1
+
+[2025-06-27 02:34:30] Running Parameter Iteration 45 of 120
+Parameters: k = 50, I2 = 0, dist = 1, k_large = 1
+
+[2025-06-27 03:19:16] Running Parameter Iteration 46 of 120
+Parameters: k = 3, I2 = 0.3, dist = 1, k_large = 1
+
+[2025-06-27 03:24:26] Running Parameter Iteration 47 of 120
+Parameters: k = 5, I2 = 0.3, dist = 1, k_large = 1
+
+[2025-06-27 03:30:55] Running Parameter Iteration 48 of 120
+Parameters: k = 10, I2 = 0.3, dist = 1, k_large = 1
+
+[2025-06-27 03:39:23] Running Parameter Iteration 49 of 120
+Parameters: k = 20, I2 = 0.3, dist = 1, k_large = 1
+
+[2025-06-27 03:53:48] Running Parameter Iteration 50 of 120
+Parameters: k = 50, I2 = 0.3, dist = 1, k_large = 1
+
+[2025-06-27 04:56:52] Running Parameter Iteration 51 of 120
+Parameters: k = 3, I2 = 0.6, dist = 1, k_large = 1
+
+[2025-06-27 05:02:11] Running Parameter Iteration 52 of 120
+Parameters: k = 5, I2 = 0.6, dist = 1, k_large = 1
+
+[2025-06-27 05:08:47] Running Parameter Iteration 53 of 120
+Parameters: k = 10, I2 = 0.6, dist = 1, k_large = 1
+
+[2025-06-27 05:17:37] Running Parameter Iteration 54 of 120
+Parameters: k = 20, I2 = 0.6, dist = 1, k_large = 1
+
+[2025-06-27 05:32:45] Running Parameter Iteration 55 of 120
+Parameters: k = 50, I2 = 0.6, dist = 1, k_large = 1
+
+[2025-06-27 06:39:05] Running Parameter Iteration 56 of 120
+Parameters: k = 3, I2 = 0.9, dist = 1, k_large = 1
+
+[2025-06-27 06:44:40] Running Parameter Iteration 57 of 120
+Parameters: k = 5, I2 = 0.9, dist = 1, k_large = 1
+
+[2025-06-27 06:51:20] Running Parameter Iteration 58 of 120
+Parameters: k = 10, I2 = 0.9, dist = 1, k_large = 1
+
+[2025-06-27 06:59:52] Running Parameter Iteration 59 of 120
+Parameters: k = 20, I2 = 0.9, dist = 1, k_large = 1
+
+[2025-06-27 07:14:34] Running Parameter Iteration 60 of 120
+Parameters: k = 50, I2 = 0.9, dist = 1, k_large = 1
+
+[2025-06-27 08:16:55] Running Parameter Iteration 61 of 120
+Parameters: k = 3, I2 = 0, dist = 2, k_large = 1
+
+[2025-06-27 08:22:18] Running Parameter Iteration 62 of 120
+Parameters: k = 5, I2 = 0, dist = 2, k_large = 1
+
+[2025-06-27 08:28:27] Running Parameter Iteration 63 of 120
+Parameters: k = 10, I2 = 0, dist = 2, k_large = 1
+
+[2025-06-27 08:36:18] Running Parameter Iteration 64 of 120
+Parameters: k = 20, I2 = 0, dist = 2, k_large = 1
+
+[2025-06-27 08:48:29] Running Parameter Iteration 65 of 120
+Parameters: k = 50, I2 = 0, dist = 2, k_large = 1
+
+[2025-06-27 09:34:12] Running Parameter Iteration 66 of 120
+Parameters: k = 3, I2 = 0.3, dist = 2, k_large = 1
+
+[2025-06-27 09:39:20] Running Parameter Iteration 67 of 120
+Parameters: k = 5, I2 = 0.3, dist = 2, k_large = 1
+
+[2025-06-27 09:45:20] Running Parameter Iteration 68 of 120
+Parameters: k = 10, I2 = 0.3, dist = 2, k_large = 1
+
+[2025-06-27 09:53:45] Running Parameter Iteration 69 of 120
+Parameters: k = 20, I2 = 0.3, dist = 2, k_large = 1
+
+[2025-06-27 10:08:11] Running Parameter Iteration 70 of 120
+Parameters: k = 50, I2 = 0.3, dist = 2, k_large = 1
+
+[2025-06-27 11:10:31] Running Parameter Iteration 71 of 120
+Parameters: k = 3, I2 = 0.6, dist = 2, k_large = 1
+
+[2025-06-27 11:15:58] Running Parameter Iteration 72 of 120
+Parameters: k = 5, I2 = 0.6, dist = 2, k_large = 1
+
+[2025-06-27 11:22:04] Running Parameter Iteration 73 of 120
+Parameters: k = 10, I2 = 0.6, dist = 2, k_large = 1
+
+[2025-06-27 11:30:44] Running Parameter Iteration 74 of 120
+Parameters: k = 20, I2 = 0.6, dist = 2, k_large = 1
+
+[2025-06-27 11:45:41] Running Parameter Iteration 75 of 120
+Parameters: k = 50, I2 = 0.6, dist = 2, k_large = 1
+
+[2025-06-27 12:51:07] Running Parameter Iteration 76 of 120
+Parameters: k = 3, I2 = 0.9, dist = 2, k_large = 1
+
+[2025-06-27 12:56:55] Running Parameter Iteration 77 of 120
+Parameters: k = 5, I2 = 0.9, dist = 2, k_large = 1
+
+[2025-06-27 13:03:07] Running Parameter Iteration 78 of 120
+Parameters: k = 10, I2 = 0.9, dist = 2, k_large = 1
+
+[2025-06-27 13:12:03] Running Parameter Iteration 79 of 120
+Parameters: k = 20, I2 = 0.9, dist = 2, k_large = 1
+
+[2025-06-27 13:26:56] Running Parameter Iteration 80 of 120
+Parameters: k = 50, I2 = 0.9, dist = 2, k_large = 1
+
+[2025-06-27 14:29:21] Running Parameter Iteration 81 of 120
+Parameters: k = 3, I2 = 0, dist = 1, k_large = 2
+
+[2025-06-27 14:34:37] Running Parameter Iteration 82 of 120
+Parameters: k = 5, I2 = 0, dist = 1, k_large = 2
+
+[2025-06-27 14:40:52] Running Parameter Iteration 83 of 120
+Parameters: k = 10, I2 = 0, dist = 1, k_large = 2
+
+[2025-06-27 14:48:41] Running Parameter Iteration 84 of 120
+Parameters: k = 20, I2 = 0, dist = 1, k_large = 2
+
+[2025-06-27 15:00:58] Running Parameter Iteration 85 of 120
+Parameters: k = 50, I2 = 0, dist = 1, k_large = 2
+
+[2025-06-27 15:57:23] Running Parameter Iteration 86 of 120
+Parameters: k = 3, I2 = 0.3, dist = 1, k_large = 2
+
+[2025-06-27 16:04:19] Running Parameter Iteration 87 of 120
+Parameters: k = 5, I2 = 0.3, dist = 1, k_large = 2
+
+[2025-06-27 16:10:35] Running Parameter Iteration 88 of 120
+Parameters: k = 10, I2 = 0.3, dist = 1, k_large = 2
+
+[2025-06-27 16:19:19] Running Parameter Iteration 89 of 120
+Parameters: k = 20, I2 = 0.3, dist = 1, k_large = 2
+
+[2025-06-27 16:34:06] Running Parameter Iteration 90 of 120
+Parameters: k = 50, I2 = 0.3, dist = 1, k_large = 2
+
+[2025-06-27 17:36:46] Running Parameter Iteration 91 of 120
+Parameters: k = 3, I2 = 0.6, dist = 1, k_large = 2
+
+[2025-06-27 17:42:49] Running Parameter Iteration 92 of 120
+Parameters: k = 5, I2 = 0.6, dist = 1, k_large = 2
+
+[2025-06-27 17:49:02] Running Parameter Iteration 93 of 120
+Parameters: k = 10, I2 = 0.6, dist = 1, k_large = 2
+
+[2025-06-27 17:58:04] Running Parameter Iteration 94 of 120
+Parameters: k = 20, I2 = 0.6, dist = 1, k_large = 2
+
+[2025-06-27 18:19:44] Running Parameter Iteration 95 of 120
+Parameters: k = 50, I2 = 0.6, dist = 1, k_large = 2
+
+[2025-06-27 19:38:13] Running Parameter Iteration 96 of 120
+Parameters: k = 3, I2 = 0.9, dist = 1, k_large = 2
+
+[2025-06-27 19:43:37] Running Parameter Iteration 97 of 120
+Parameters: k = 5, I2 = 0.9, dist = 1, k_large = 2
+
+[2025-06-27 19:49:55] Running Parameter Iteration 98 of 120
+Parameters: k = 10, I2 = 0.9, dist = 1, k_large = 2
+
+[2025-06-27 19:58:17] Running Parameter Iteration 99 of 120
+Parameters: k = 20, I2 = 0.9, dist = 1, k_large = 2
+
+[2025-06-27 20:12:57] Running Parameter Iteration 100 of 120
+Parameters: k = 50, I2 = 0.9, dist = 1, k_large = 2
+
+[2025-06-27 21:14:51] Running Parameter Iteration 101 of 120
+Parameters: k = 3, I2 = 0, dist = 2, k_large = 2
+
+[2025-06-27 21:20:24] Running Parameter Iteration 102 of 120
+Parameters: k = 5, I2 = 0, dist = 2, k_large = 2
+
+[2025-06-27 21:26:20] Running Parameter Iteration 103 of 120
+Parameters: k = 10, I2 = 0, dist = 2, k_large = 2
+
+[2025-06-27 21:34:10] Running Parameter Iteration 104 of 120
+Parameters: k = 20, I2 = 0, dist = 2, k_large = 2
+
+[2025-06-27 21:46:36] Running Parameter Iteration 105 of 120
+Parameters: k = 50, I2 = 0, dist = 2, k_large = 2
+
+[2025-06-27 22:30:32] Running Parameter Iteration 106 of 120
+Parameters: k = 3, I2 = 0.3, dist = 2, k_large = 2
+
+[2025-06-27 22:36:22] Running Parameter Iteration 107 of 120
+Parameters: k = 5, I2 = 0.3, dist = 2, k_large = 2
+
+[2025-06-27 22:43:01] Running Parameter Iteration 108 of 120
+Parameters: k = 10, I2 = 0.3, dist = 2, k_large = 2
+
+[2025-06-27 22:51:28] Running Parameter Iteration 109 of 120
+Parameters: k = 20, I2 = 0.3, dist = 2, k_large = 2
+
+[2025-06-27 23:06:01] Running Parameter Iteration 110 of 120
+Parameters: k = 50, I2 = 0.3, dist = 2, k_large = 2
+
+[2025-06-28 00:29:12] Running Parameter Iteration 111 of 120
+Parameters: k = 3, I2 = 0.6, dist = 2, k_large = 2
+
+[2025-06-28 00:35:03] Running Parameter Iteration 112 of 120
+Parameters: k = 5, I2 = 0.6, dist = 2, k_large = 2
+
+[2025-06-28 00:41:22] Running Parameter Iteration 113 of 120
+Parameters: k = 10, I2 = 0.6, dist = 2, k_large = 2
+
+[2025-06-28 00:50:28] Running Parameter Iteration 114 of 120
+Parameters: k = 20, I2 = 0.6, dist = 2, k_large = 2
+
+[2025-06-28 01:05:21] Running Parameter Iteration 115 of 120
+Parameters: k = 50, I2 = 0.6, dist = 2, k_large = 2
+
+[2025-06-28 02:10:00] Running Parameter Iteration 116 of 120
+Parameters: k = 3, I2 = 0.9, dist = 2, k_large = 2
+
+[2025-06-28 02:15:27] Running Parameter Iteration 117 of 120
+Parameters: k = 5, I2 = 0.9, dist = 2, k_large = 2
+
+[2025-06-28 02:21:42] Running Parameter Iteration 118 of 120
+Parameters: k = 10, I2 = 0.9, dist = 2, k_large = 2
+
+[2025-06-28 02:30:44] Running Parameter Iteration 119 of 120
+Parameters: k = 20, I2 = 0.9, dist = 2, k_large = 2
+
+[2025-06-28 02:45:21] Running Parameter Iteration 120 of 120
+Parameters: k = 50, I2 = 0.9, dist = 2, k_large = 2
+> 
+> ## Store the computational details
+> ## -----------------------------------------------------------------------------
+> writeLines(capture.output(sessionInfo()), "../compinfo/sessionInfo.txt")
+> 
+> 
+> proc.time()
+      user     system    elapsed 
+    71.345     18.195 137402.235 

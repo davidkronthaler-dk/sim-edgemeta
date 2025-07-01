@@ -89,7 +89,7 @@ performance_mu <- function(mm) {
   sqe <- bias ^ 2
   
   # Coverage of 95% CI for mu
-  cis <- list(trySim( {c(mm$p.meta1$lower.fixed, mm$p.meta1$upper.fixed)} , 2),
+  cis <- list(trySim( {c(mm$p.meta2$lower.random, mm$p.meta2$upper.random)} , 2),
               trySim( {c(mm$p.meta1$lower.random, mm$p.meta1$upper.random)} , 2),
               trySim( {c(mm$held2025u$cilower, mm$held2025u$ciupper)} , 2),
               trySim( {c(mm$held2025a$cilower, mm$held2025a$ciupper)} , 2),
@@ -105,7 +105,7 @@ performance_mu <- function(mm) {
   cisk <- mapply(function(x, p) {
     if (length(x) == 2 && !anyNA(x) && !is.na(p)) ski(x, p) else NA_real_
   }, x = cis,
-  p = c(trySim( {mm$p.meta1$TE.fixed} ),
+  p = c(trySim( {mm$p.meta1$TE.random} ),
         trySim( {mm$p.meta1$TE.random} ), 
         trySim( {mm$held2025u$point} ),
         trySim( {mm$held2025a$point} ),

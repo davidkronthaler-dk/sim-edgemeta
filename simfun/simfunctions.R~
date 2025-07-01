@@ -115,7 +115,7 @@ simstudy <-  function(k, I2, k_large, dist, niter) {
 parsimstudy <- function(k, I2, k_large, dist, niter) {
   
   # Number of parallelized CPUs
-  n_cores <- 100
+  n_cores <- 200
   
   # Number of iterations per core
   niter_per_cpu <- ceiling(niter/n_cores)

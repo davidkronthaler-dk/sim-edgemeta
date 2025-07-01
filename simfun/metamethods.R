@@ -8,10 +8,10 @@ metamethods <- function(dt) {
   t <- rep(NA, 5)
   
   # 'meta' package
-  t[1] <- system.time(p.meta1 <- trySim({ metaclassic(dt$hes, dt$se, pi = "HTS") }
+  t[1] <- system.time(p.meta1 <- trySim({ metaclassic(dt$hes, dt$se, pi = "HTS", cit = "HK") }
   ))["elapsed"]
   
-  t[2] <- system.time(p.meta2 <- trySim({ metaclassic(dt$hes, dt$se, pi = "NNF") }
+  t[2] <- system.time(p.meta2 <- trySim({ metaclassic(dt$hes, dt$se, pi = "NNF", cit = "classic") }
   ))["elapsed"]
   
   # Store HTS and NNF prediction interval
@@ -47,11 +47,11 @@ metamethods <- function(dt) {
 }
 
 
-metaclassic <- function(es, se, pi) {
+metaclassic <- function(es, se, pi, cit = "HK") {
   # Attempt 1: default settings
   result <- tryCatch(
     meta::metagen(TE = es, seTE = se, random = TRUE, method.tau = "REML",
-                  method.random.ci = "HK", method.predict = pi, B = 100000
+                  method.random.ci = cit, method.predict = pi, B = 100000
     ),
     error = function(e) NULL
   )
@@ -60,7 +60,7 @@ metaclassic <- function(es, se, pi) {
   if (is.null(result)) {
     result <- tryCatch(
       meta::metagen(TE = es, seTE = se, random = TRUE, method.tau = "REML",
-                    method.random.ci = "HK", method.predict = pi, B = 100000,
+                    method.random.ci = cit, method.predict = pi, B = 100000,
                     control = list(maxiter = 10000)),
       error = function(e) NULL
     )
@@ -70,7 +70,7 @@ metaclassic <- function(es, se, pi) {
   if (is.null(result)) {
     result <- tryCatch(
       meta::metagen(TE = es, seTE = se, random = TRUE, method.tau = "REML",
-                    method.random.ci = "HK", method.predict = pi, B = 100000,
+                    method.random.ci = cit, method.predict = pi, B = 100000,
                     control = list(stepadj = 0.5)),
       error = function(e) NULL
     )
@@ -80,7 +80,7 @@ metaclassic <- function(es, se, pi) {
   if (is.null(result)) {
     result <- tryCatch(
       meta::metagen(TE = es, seTE = se, random = TRUE, method.tau = "REML",
-                    method.random.ci = "HK", method.predict = pi, B = 100000,
+                    method.random.ci = cit, method.predict = pi, B = 100000,
                     control = list(maxiter = 10000, stepadj = 0.5)),
       error = function(e) NULL
     )
@@ -90,7 +90,7 @@ metaclassic <- function(es, se, pi) {
   if (is.null(result)) {
     result <- tryCatch(
       meta::metagen(TE = es, seTE = se, random = TRUE, method.tau = "REML",
-                    method.random.ci = "HK", method.predict = pi, B = 100000,
+                    method.random.ci = cit, method.predict = pi, B = 100000,
                     control = list(maxiter = 100000, stepadj = 0.25)),
       error = function(e) NULL
     )
