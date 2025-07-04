@@ -1,5 +1,5 @@
 # sim-metaprediction
-Simulation study investigating the predictive distributions for meta-analysis implemented in the `metaprediction` package. We provide concise description based on the ADEMP framework.
+Simulation study investigating the predictive distributions for meta-analysis implemented in the `metaprediction` package. We provide a concise description based on the ADEMP framework.
 
 ## Aims
 - Assess performance of predictive distributions in terms of calibration and sharpness.
