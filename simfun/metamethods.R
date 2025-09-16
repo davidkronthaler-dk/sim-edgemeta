@@ -22,10 +22,10 @@ metamethods <- function(dt) {
     c(p.meta2$lower.predict, p.meta2$upper.predict) else rep(NA_real_, 2)}, 2)
   
   # methods from held et al., 2025
-  held2025u <- trySim({ metaprediction::opti_num(dt$hes, dt$se) })
-  held2025a <- trySim({ metaprediction::opti_num(dt$hes, sqrt(dt$se ^ 2 + p.meta1$tau2)) })
+  held2025u <- trySim({ edgemeta::opti_num(dt$hes, dt$se) })
+  held2025a <- trySim({ edgemeta::opti_num(dt$hes, sqrt(dt$se ^ 2 + p.meta1$tau2)) })
   
-  # 'metaprediction' package
+  # 'edgemeta' package
   t[3] <- system.time(pd.fix <- trySim({ PredDist(es = dt$hes, se = dt$se, 
                                                   method = "FixedTau2") }
   ))["elapsed"]
