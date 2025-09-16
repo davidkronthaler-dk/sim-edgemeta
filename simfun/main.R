@@ -1,19 +1,18 @@
 # ------------------------------------------------------------------------------
 # Main document for the simulation study on meta-analysis evaluating 
+# - Confidence intervals for the average effect
+# - Point estimators for the average effect
 # - Predictive distributions
 # - 95% Prediction intervals 
-# - Point estimators for the average effect
-# - Confidence intervals for the average effect
 # We compare methods proposed by us to standard methods implemented in the 
-# 'meta' package and methods proposed by Held et al. (2025) implemented in the
-# 'confMeta' package
+# 'meta' package and methods proposed by Held et al. (2025)
 #-------------------------------------------------------------------------------
 
 ## Load libraries
 ##------------------------------------------------------------------------------
 library(doRNG)             # RNG streams
 library(doParallel)        # Parallelization
-library(metaprediction)    # Our package
+library(edgemeta)          # Our package
 library(sn)                # Skew-normal distribution
 library(meta)              # Standard methods
 library(testthat)          # Tests for simulation functions
