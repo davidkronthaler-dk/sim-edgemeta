@@ -15,7 +15,7 @@ We varied:
 Study sizes were set to 50 for normal studies and to 500 for large studies. We performed the simulation study in a full-factorial manner, investigating all combinations of factor levels. Effect estimates are generated on the standardized mean difference scale.
 
 ## Estimands and Other Targets
-The true average effect was set to μ = −0.3.  Our aim to evaluate predictive performance represents a target, since it involves predicting the entire distribution of unobserved future effects rather than estimating a single parameter with a fixed value.
+The true average effect was set to μ = −0.3.  Our aim to evaluate predictive performance represents a target, since it involves predicting the entire distribution of future effects rather than estimating a single parameter with a fixed value.
 
 ## Methods
 Methods differ across performance measures:
