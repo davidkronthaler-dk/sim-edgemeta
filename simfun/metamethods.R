@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Function to fit methods
+# Functions to fit methods
 # ------------------------------------------------------------------------------
 
 metamethods <- function(dt) {
@@ -21,9 +21,9 @@ metamethods <- function(dt) {
   pi.nnf <- trySim({if (!is.null(p.meta2$lower.predict) && !is.null(p.meta2$upper.predict)) 
     c(p.meta2$lower.predict, p.meta2$upper.predict) else rep(NA_real_, 2)}, 2)
   
-  # methods from held et al., 2025
-  held2025u <- trySim({ edgemeta::opti_num(dt$hes, dt$se) })
-  held2025a <- trySim({ edgemeta::opti_num(dt$hes, sqrt(dt$se ^ 2 + p.meta1$tau2)) })
+  # Methods from Held et al., 2025
+  held2025u <- trySim({ remaeffect(dt$hes, dt$se, "NHEU") }) # 'held2025u' deprecated, not used
+  held2025a <- trySim({ remaeffect(dt$hes, dt$se, "NHEU") })
   
   # 'edgemeta' package
   t[3] <- system.time(pd.fix <- trySim({ PredDist(es = dt$hes, se = dt$se, 

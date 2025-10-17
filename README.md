@@ -1,14 +1,20 @@
 # sim-edgemeta
-Simulation study investigating the performance of the CD-Edgington estimator for the average effect and predictive distributions method for random-effects meta-analysis implemented in the `edgemeta` package. We provide a concise description based on the ADEMP framework.
+
+This repository contains code and results of a simulation study investigating the performance of the CD-Edgington estimator for the average effect and Edgington's predictive distributions for random-effects meta-analysis implemented in the `edgemeta` package. Further, the folder 'manuscriptcode' contains the code for the manuscripts "Edgington's Method for Random-Effects Meta-Analysis Part I: Estimation" and "Edgington's Method for Random-Effects Meta-Analysis Part II: Prediction", both available as Preprints on ArXiv:
+- Kronthaler, D., & Held, L. (2025). *Edgington’s method for random-effects meta-analysis Part I: Estimation*. arXiv. https://arxiv.org/abs/2510.12301
+- Kronthaler, D., & Held, L. (2025). *Edgington’s method for random-effects meta-analysis Part II: Prediction*. arXiv. https://arxiv.org/abs/2510.13216
+
+# Simulation Study
+We provide a concise description based on the ADEMP framework.
 
 ## Aims
 - Assess performance of CD-Edgington estimator for the average effect.
-- Assess performance of predictive distributions in terms of calibration and sharpness.
+- Assess performance of Edgington's predictive distributions in terms of calibration and sharpness.
 
 ## Data-Generating Process
 We varied:
 - the number of studies k ∈ {3, 5, 10, 20, 50}.
-- the between-study heterogeneity determined by Higgins’ I2 ∈ {0.0, 0.3, 0.6, 0.9}.
+- the between-study heterogeneity determined by Higgins’ I2 ∈ {0%, 30%, 60%, 90%}.
 - the number of large studies ∈ {0, 1, 2}.
 - the underyling effect distribution ∈ {Normal, Skew-normal}.
 
@@ -20,10 +26,10 @@ The true average effect was set to μ = −0.3.  Our aim to evaluate predictive 
 ## Methods
 Methods differ across performance measures:
 
--  95% confidence intervals: CD-Edgington, classical random-effects meta-analysis, Hartung–Knapp and Edgington’s method with additive heterogeneity adjustment.
+- 95% confidence intervals: CD-Edgington, classical random-effects meta-analysis, Hartung–Knapp and Edgington’s method with additive heterogeneity adjustment.
 - Point estimation of the average effect: CD-Edgington, classical inverse-variance weights estimator from random-effects meta-analysis, Edgington's method with additive heterogeneity adjustment.
-- 95% prediction intervals: Equi-tailed 95% prediction intervals obtained from the three predictive distributions in the `edgemeta`package, the Higgins-Thompson-Spiegelhalter prediction interval and the parametric boostrap prediction  interval.
-- Predictive distributions: The three predictive distributions in the `edgemeta`package and the Higgins-Thompson-Spiegelhalter predictive distribution.
+- 95% prediction intervals: Equi-tailed 95% prediction intervals obtained from Edgington's predictive distributions in the `edgemeta`package, the Higgins-Thompson-Spiegelhalter prediction interval and the parametric boostrap prediction interval.
+- Predictive distributions: Edgington's predictive distributions from the `edgemeta`package and the Higgins-Thompson-Spiegelhalter predictive distribution.
 
 ## Performance Measures
 - Coverage of 95% confidence intervals

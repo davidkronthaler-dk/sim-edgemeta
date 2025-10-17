@@ -92,7 +92,7 @@ simcrps <- function(s, tn) {
         length(tn_clean) == 0)
       return(NA_real_)
     
-    metaprediction::crps(s_clean, tn_clean)
+    edgemeta::crps(s_clean, tn_clean)
     
   })
   return(sc)

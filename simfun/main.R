@@ -5,7 +5,9 @@
 # - Predictive distributions
 # - 95% Prediction intervals 
 # We compare methods proposed by us to standard methods implemented in the 
-# 'meta' package and methods proposed by Held et al. (2025)
+# 'meta' package and methods proposed by Held et al. (2025). The proposed methods
+# and the methods by Held et al. (2025) are accessed through the 'edgemeta'
+# package.
 #-------------------------------------------------------------------------------
 
 ## Load libraries
@@ -14,7 +16,7 @@ library(doRNG)             # RNG streams
 library(doParallel)        # Parallelization
 library(edgemeta)          # Our package
 library(sn)                # Skew-normal distribution
-library(meta)              # Standard methods
+library(meta)              # Standard meta-analysis methods
 library(testthat)          # Tests for simulation functions
 
 ## Source functions and perform unit tests

@@ -56,10 +56,10 @@ onesim <- function(k, I2, k_large, dist) {
   # Extract future effects
   tn <- trySim( {dt$es[(k + 1):length(dt$es)]} )
   
-  # Fishers weighted skewness for effect estimates
+  # Fishers weighted skewness of effect estimates
   skhes <- fwskew(dt$hes, dt$se)
   
-  # Fishers skewness for effects
+  # Fishers skewness of effects
   skes <- if (I2 == 0) { 0 } else { fwskew(dt$es[1:k], rep(1, k)) }
   
   # Fit methods
@@ -72,12 +72,26 @@ onesim <- function(k, I2, k_large, dist) {
   pmu <- performance_mu(mm = mm)
   
   # Return
-  r <- c(ppd$picvr, ppd$piwd, ppd$pisk, mm$t,
-         ppd$qhts, ppd$qfix, ppd$qsimple, ppd$qfull,
-         ppd$crpshts, ppd$crpsfix, ppd$crpssimple, ppd$crpsfull,
-         pmu$bias, pmu$sqe,
-         pmu$cicvr, pmu$ciwd, pmu$cisk, 
-         skhes, skes, trySim( {mm$p.meta1$tau2} ))
+  r <- c(ppd$picvr, 
+         ppd$piwd, 
+         ppd$pisk,
+         mm$t,
+         ppd$qhts, 
+         ppd$qfix,
+         ppd$qsimple,
+         ppd$qfull,
+         ppd$crpshts, 
+         ppd$crpsfix,
+         ppd$crpssimple, 
+         ppd$crpsfull,
+         pmu$bias, 
+         pmu$sqe,
+         pmu$cicvr, 
+         pmu$ciwd, 
+         pmu$cisk, 
+         skhes, 
+         skes, 
+         trySim( {mm$p.meta1$tau2} ))
   return(r)
 }
 
@@ -127,16 +141,27 @@ parsimstudy <- function(k, I2, k_large, dist, niter) {
   on.exit(parallel::stopCluster(cl))
   
   # Export functions to cluster
-  clusterExport(cl, varlist = c("simstudy", "onesim", "dgp", "coverpi", "coverci", 
-                                "ski", "fwskew", "pg", "simcrps", "trySim", "metaclassic",
-                                "metamethods", "performance_pd", "performance_mu"))
+  clusterExport(cl, varlist = c("simstudy", 
+                                "onesim", 
+                                "dgp", 
+                                "coverpi", 
+                                "coverci", 
+                                "ski", 
+                                "fwskew", 
+                                "pg", 
+                                "simcrps", 
+                                "trySim", 
+                                "metaclassic",
+                                "metamethods", 
+                                "performance_pd", 
+                                "performance_mu"))
   
   # Register for parallel processing
   registerDoParallel(cl)
   
   # Parallelized computation
   res <- foreach(core_nr = 1:n_cores,
-                 .packages = c("meta", "sn", "metaprediction"),
+                 .packages = c("meta", "sn", "edgemeta"),
                  .combine = rbind) %dorng% {
                    simstudy(k = k, 
                             I2 = I2, 
