@@ -1,6 +1,6 @@
 # sim-edgemeta
 
-This repository contains code and results of a simulation study investigating the performance of the CD-Edgington estimator for the average effect and Edgington's predictive distributions for random-effects meta-analysis implemented in the `edgemeta` package. Further, the folder 'manuscriptcode' contains the code for the manuscripts "Edgington's Method for Random-Effects Meta-Analysis Part I: Estimation" and "Edgington's Method for Random-Effects Meta-Analysis Part II: Prediction", both available as Preprints on ArXiv:
+This repository contains code and results of a simulation study investigating the CD-Edgington estimator and Edgington's predictive distributions for random-effects meta-analysis. The investigated methods are implemented in the `edgemeta` package. Further, the folder `manuscriptcode contains the code for the manuscripts "Edgington's Method for Random-Effects Meta-Analysis Part I: Estimation" and "Edgington's Method for Random-Effects Meta-Analysis Part II: Prediction", both available as preprints on ArXiv:
 - Kronthaler, D., & Held, L. (2025). *Edgington’s method for random-effects meta-analysis Part I: Estimation*. arXiv. https://arxiv.org/abs/2510.12301
 - Kronthaler, D., & Held, L. (2025). *Edgington’s method for random-effects meta-analysis Part II: Prediction*. arXiv. https://arxiv.org/abs/2510.13216
 
