@@ -27,17 +27,17 @@ metamethods <- function(dt) {
   
   # 'edgemeta' package
   t[3] <- system.time(pd.fix <- trySim({ PredDist(es = dt$hes, se = dt$se, 
-                                                  method = "FixedTau2") }
+                                                  method = "PCD-fixed") }
   ))["elapsed"]
   
   pi.fix <- trySim({ if (!is.null(pd.fix$PI)) {pd.fix$PI} else {pd.fix$CI} }, 2)
   
   t[4] <- system.time(pd.simple <- trySim({ PredDist(es = dt$hes, se = dt$se, 
-                                                     method = "SimplifiedCD") }
+                                                     method = "PCD-simplified") }
   ))["elapsed"]
   
   t[5] <- system.time(pd.full <- trySim({ PredDist(es = dt$hes, se = dt$se, 
-                                                   method = "FullCD") }
+                                                   method = "PCD-full") }
   ))["elapsed"]
   
   return(list(t = t, p.meta1 = p.meta1, p.meta2 = p.meta2, pi.hts = pi.hts,
