@@ -80,8 +80,8 @@ performance_mu <- function(mm) {
   # Bias of point estimator for mu
   muhat <- c(trySim( {mm$p.meta1$TE.fixed} ),    
              trySim( {mm$p.meta1$TE.random} ),
-             trySim( {mm$held2025u$estimate} ), 
-             trySim( {mm$held2025a$estimate} ),
+             trySim( {mm$held2025u$p_max[,"x"]} ), 
+             trySim( {mm$held2025a$p_max[,"x"]} ),
              trySim( {mean(mm$pd.full$samples[,"mu"], na.rm = T)} ))
   bias <- ifelse(is.na(muhat), NA_real_, muhat + 0.3)
   
@@ -91,8 +91,8 @@ performance_mu <- function(mm) {
   # Coverage of 95% CI for mu
   cis <- list(trySim( {c(mm$p.meta2$lower.random, mm$p.meta2$upper.random)} , 2),
               trySim( {c(mm$p.meta1$lower.random, mm$p.meta1$upper.random)} , 2),
-              trySim( {c(mm$held2025u$CI[1], mm$held2025u$CI[2])} , 2),
-              trySim( {c(mm$held2025a$CI[1], mm$held2025a$CI[2])} , 2),
+              trySim( {mm$held2025u$joint_cis} , 2),
+              trySim( {mm$held2025a$joint_cis} , 2),
               trySim( {quantile(mm$pd.full$samples[, "mu"], p = c(0.025, 0.975), na.rm = T)} , 2))
   cicvr <- sapply(cis, function(x) {coverci(x)})
   
@@ -107,8 +107,8 @@ performance_mu <- function(mm) {
   }, x = cis,
   p = c(trySim( {mm$p.meta1$TE.random} ),
         trySim( {mm$p.meta1$TE.random} ), 
-        trySim( {mm$held2025u$estimate} ),
-        trySim( {mm$held2025a$estimate} ),
+        trySim( {mm$held2025u$p_max[,"x"]} ),
+        trySim( {mm$held2025u$p_max[,"x"]} ),
         trySim( {mean(mm$pd.full$samples[,"mu"], na.rm = T)} )))
   
   # return

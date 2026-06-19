@@ -161,7 +161,7 @@ parsimstudy <- function(k, I2, k_large, dist, niter) {
   
   # Parallelized computation
   res <- foreach(core_nr = 1:n_cores,
-                 .packages = c("meta", "sn", "edgemeta"),
+                 .packages = c("meta", "sn", "edgemeta", "confMeta"),
                  .combine = rbind) %dorng% {
                    simstudy(k = k, 
                             I2 = I2, 

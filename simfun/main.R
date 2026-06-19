@@ -6,8 +6,7 @@
 # - Point estimators for the average effect
 # We compare methods proposed by us to standard methods implemented in the 
 # 'meta' package and methods proposed by Held et al. (2025). The proposed methods
-# and the methods by Held et al. (2025) are accessed through the 'edgemeta'
-# package.
+# are accessed through the 'edgemeta' package.
 #-------------------------------------------------------------------------------
 
 ## Load libraries

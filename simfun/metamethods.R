@@ -22,14 +22,21 @@ metamethods <- function(dt) {
     c(p.meta2$lower.predict, p.meta2$upper.predict) else rep(NA_real_, 2)}, 2)
   
   # Methods from Held et al., 2025
-  held2025u <- trySim({ remaeffect(dt$hes, dt$se, "NHEU") }) # 'held2025u' deprecated, not used
-  held2025a <- trySim({ remaeffect(dt$hes, dt$se, "NHEU") })
+  held2025u <- trySim({confMeta(dt$hes, dt$se, heterogeneity = "none",
+                                conf_level = 0.95,
+                                fun = p_edgington, 
+                                fun_name = "Edgington  (one-sided input)",
+                                input_p = "greater")})
+  held2025a <- trySim({confMeta(dt$hes, dt$se, heterogeneity = "additive",
+                                tau2 = p.meta1$tau2, conf_level = 0.95,
+                                fun = p_edgington, 
+                                fun_name = "Edgington  (one-sided input)",
+                                input_p = "greater")})
   
   # 'edgemeta' package
   t[3] <- system.time(pd.fix <- trySim({ PredDist(es = dt$hes, se = dt$se, 
                                                   method = "PCD-fixed") }
   ))["elapsed"]
-  
   pi.fix <- trySim({ if (!is.null(pd.fix$PI)) {pd.fix$PI} else {pd.fix$CI} }, 2)
   
   t[4] <- system.time(pd.simple <- trySim({ PredDist(es = dt$hes, se = dt$se, 

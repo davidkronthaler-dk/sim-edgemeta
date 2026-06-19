@@ -2,8 +2,7 @@
 # Unit tests for simulation functions
 #-------------------------------------------------------------------------------
 
-# Data-generating mechanism
-test_that("data-generating mechanisms works for all scenarios", {
+test_that("one_simulation works for all scenarios", {
   fltest <- expand.grid(
     k = c(3, 5, 10, 20, 50),
     I2 = c(0, 0.3, 0.6, 0.9),
@@ -12,7 +11,7 @@ test_that("data-generating mechanisms works for all scenarios", {
   )
   
   apply(fltest, 1, function(row) {
-    expect_no_error(dgp(
+    expect_no_error(onesim(
       k = as.numeric(row["k"]),
       I2 = as.numeric(row["I2"]),
       k_large = as.numeric(row["k_large"]),
@@ -21,4 +20,3 @@ test_that("data-generating mechanisms works for all scenarios", {
   })
   
 })
-

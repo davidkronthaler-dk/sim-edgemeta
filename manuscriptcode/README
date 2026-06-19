@@ -1,0 +1,29 @@
+This folder contains the R code and data files accompanying the manuscript 
+
+"Prediction intervals for random-effects meta-analysis based on confidence 
+distributions and Edgington's method"
+
+by David Kronthaler and Leonhard Held.
+
+Files
+
+* code_manuscript.R: R script to reproduce the analyses presented in the manuscript.
+* code_supplementary_material.R: R script to reproduce the analyses presented in the 
+  Supplementary Material. This script also generates the files timeCDEdgington.RDS 
+  and MCvsGAQ.RDS.
+* functions/utility_functions.R: Utility functions used by both R scripts.
+* data/Covid_example.Rdata: Data for the COVID example.
+* data/Serenoa_example.Rdata: Data for the Serenoa example.
+* data/timeCDEdgington.RDS: Results for the computation time analysis of the CD-Edgington 
+  method.
+* data/MCvsGAQ.RDS: Results comparing the Monte Carlo and GAQ implementations of the 
+  CD-Edgington method.
+* ../results/: Folder containing 120 .RDS files, one for each simulation scenario 
+  considered in the simulation study.
+
+To run the code
+
+Install the required R packages listed in the library() calls at the beginning of 
+the corresponding R script. Set the working directory to this folder and run either
+code_manuscript.R or code_supplementary_material.R. The directory structure should
+be preserved.
