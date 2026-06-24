@@ -1,8 +1,8 @@
 # sim-edgemeta
 
-This repository contains code and results of a simulation study investigating Edgington's predictive distributions and the CD-Edgington estimator for random-effects meta-analysis. The investigated methods are implemented in the `edgemeta` package ([https://github.com/davidkronthaler-dk/edgemeta]). Further, the folder `manuscriptcode` contains the code for the manuscript:
+This repository contains code and results of a simulation study investigating Edgington's predictive distributions and the CD-Edgington estimator for random-effects meta-analysis. The investigated methods are implemented in the `edgemeta` package (https://github.com/davidkronthaler-dk/edgemeta). Further, the folder `manuscriptcode` contains the code for the manuscript:
 
-Kronthaler, D., & Held, L. (2026). *Prediction intervals for random-effects meta-analysis based on confidence distributions and Edgington's method*. [arXiv. https://doi.org/10.48550/arXiv.2510.13216]
+Kronthaler, D., & Held, L. (2026). *Prediction intervals for random-effects meta-analysis based on confidence distributions and Edgington's method*. arXiv. https://doi.org/10.48550/arXiv.2510.13216
 # Simulation Study
 We provide a concise description based on the ADEMP framework.
 
